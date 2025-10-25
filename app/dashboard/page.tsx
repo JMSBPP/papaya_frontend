@@ -1,9 +1,26 @@
+'use client';
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowUpRight, QrCode, TrendingUp } from "lucide-react"
+import ApplePayButton from "@/components/Applepay/ApplePayButton"
+import { useState } from "react"
 
 export default function DashboardPage() {
+  const [paymentStatus, setPaymentStatus] = useState<string>('');
+
+
+  const handlePaymentSuccess = (response: PaymentResponse) => {
+    console.log('Payment successful:', response);
+    setPaymentStatus('✅ Payment completed successfully!');
+  };
+
+  const handlePaymentError = (error: Error) => {
+    console.error('Payment error:', error);
+    setPaymentStatus(`❌ Error: ${error.message}`);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -79,6 +96,16 @@ export default function DashboardPage() {
               <span className="font-medium">QR Payment</span>
             </Button>
           </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-3">
+          <ApplePayButton
+            amount="29.99"
+            currencyCode="USD"
+            countryCode="US"
+            merchantName="PayPayer"
+            onSuccess={handlePaymentSuccess}
+            onError={handlePaymentError}
+          />
         </div>
 
         {/* Recent Transactions */}
