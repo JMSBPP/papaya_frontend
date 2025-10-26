@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { WalletButton } from "@/components/WalletButton"
 import { Check } from "lucide-react"
 
 export default function LandingPage() {
@@ -54,15 +55,7 @@ export default function LandingPage() {
               Get Started with Apple Pay
             </Button>
           </Link>
-          <Link href="/dashboard" className="block">
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full border-primary text-primary hover:bg-primary/5 bg-transparent"
-            >
-              Connect Crypto Wallet
-            </Button>
-          </Link>
+          <WalletButton />
         </div>
 
         {/* Footer Text */}
